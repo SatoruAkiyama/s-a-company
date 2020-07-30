@@ -1,16 +1,16 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-const blue = "#0B72B9";
+const pink = "#ff7474";
 const orange = "#FFBA60";
 
 export default createMuiTheme({
   palette: {
     common: {
-      blue: `${blue}`,
+      pink: `${pink}`,
       orange: `${orange}`,
     },
     primary: {
-      main: `${blue}`,
+      main: `${pink}`,
     },
     secondary: {
       main: `${orange}`,
