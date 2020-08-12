@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import logo from "../../assets/logo.png";
 
@@ -40,6 +42,10 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.tab,
     minWidth: 10,
     marginLeft: `25px`,
+    opacity: 0.6,
+    "&:hover": {
+      opacity: 1,
+    },
   },
   button: {
     ...theme.typography.estimate,
@@ -47,22 +53,81 @@ const useStyles = makeStyles((theme) => ({
     marginRight: `25px`,
     height: `45px`,
   },
+  menu: {
+    backgroundColor: theme.palette.common.red,
+    color: "white",
+    borderRadius: 0,
+  },
+  menuItem: {
+    ...theme.typography.tab,
+    opacity: 0.6,
+    "&:hover": {
+      opacity: 1,
+    },
+  },
 }));
 
 const Header = () => {
   const classes = useStyles();
   const [value, setValue] = useState("/");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
   let history = useHistory();
   let pathname = history.location.pathname;
+  if (
+    pathname === "/web-sites" ||
+    pathname === "/custom-software" ||
+    pathname === "/mobile-apps"
+  ) {
+    pathname = "/services";
+  }
+
+  useEffect(() => {
+    setValue(pathname);
+
+    switch (history.location.pathname) {
+      case "/custom-software":
+        setSelectedIndex(1);
+        break;
+      case "/mobile-apps":
+        setSelectedIndex(2);
+        break;
+      case "/web-sites":
+        setSelectedIndex(3);
+        break;
+      default:
+        break;
+    }
+  }, [pathname, history.location.pathname]);
 
   const handleChange = (e, value) => {
     e.preventDefault();
     setValue(value);
   };
 
-  useEffect(() => {
-    setValue(pathname);
-  }, [pathname]);
+  const handleMouseOver = (e) => {
+    setAnchorEl(e.currentTarget);
+    setOpen(true);
+  };
+
+  const handleClose = (e) => {
+    setAnchorEl(null);
+    setOpen(false);
+  };
+
+  const handleMenuItemClick = (e, i) => {
+    handleClose();
+    setSelectedIndex(i);
+  };
+
+  const menuOptions = [
+    { name: "Services", link: "/services" },
+    { name: "Custom Software", link: "/custom-software" },
+    { name: "Mobile App Development", link: "/mobile-apps" },
+    { name: "Website Develpment", link: "/web-sites" },
+  ];
 
   return (
     <>
@@ -91,8 +156,11 @@ const Header = () => {
                 value="/"
               />
               <Tab
+                aria-owns={anchorEl ? "simple-menu" : undefined}
+                aria-haspopup={anchorEl ? "true" : undefined}
                 className={classes.tab}
                 onClick={() => history.push("./services")}
+                onMouseOver={(e) => handleMouseOver(e)}
                 label="Services"
                 value="/services"
               />
@@ -123,6 +191,31 @@ const Header = () => {
             >
               Free Estimate
             </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              classes={{ paper: classes.menu }}
+              MenuListProps={{ onMouseLeave: handleClose }}
+              elevation={0}
+            >
+              {menuOptions.map((option, i) => (
+                <MenuItem
+                  key={i}
+                  component={Link}
+                  to={option.link}
+                  onClick={(e) => {
+                    handleMenuItemClick(e, i);
+                    setValue("/services");
+                  }}
+                  selected={i === selectedIndex && value === "/services"}
+                  classes={{ root: classes.menuItem }}
+                >
+                  {option.name}
+                </MenuItem>
+              ))}
+            </Menu>
           </Toolbar>
         </AppBar>
       </ElevationScroll>

@@ -17,7 +17,7 @@ const App = () => {
           component={() => <div>custom-software</div>}
         />
         <Route path="/mobile-apps" component={() => <div>mobile-apps</div>} />
-        <Route path="/web-site" component={() => <div>web-site</div>} />
+        <Route path="/web-sites" component={() => <div>web-site</div>} />
         <Route path="/revolution" component={() => <div>revoluotion</div>} />
         <Route path="/about-us" component={() => <div>about</div>} />
         <Route path="/contact-us" component={() => <div>contact</div>} />
