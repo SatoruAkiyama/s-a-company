@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
-import ToolBar from "@material-ui/core/Toolbar";
+import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logo.png";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     height: `5em`,
+    cursor: `pointer`,
   },
   tabContainer: {
     marginLeft: `auto`,
@@ -52,7 +53,7 @@ const Header = () => {
   const classes = useStyles();
   const [value, setValue] = useState("/");
   let history = useHistory();
-  let path = history.location.pathname;
+  let pathname = history.location.pathname;
 
   const handleChange = (e, value) => {
     e.preventDefault();
@@ -60,14 +61,14 @@ const Header = () => {
   };
 
   useEffect(() => {
-    setValue(path);
-  }, [path]);
+    setValue(pathname);
+  }, [pathname]);
 
   return (
     <>
       <ElevationScroll>
         <AppBar>
-          <ToolBar disableGutters>
+          <Toolbar disableGutters>
             <img
               src={logo}
               alt="company log"
@@ -122,7 +123,7 @@ const Header = () => {
             >
               Free Estimate
             </Button>
-          </ToolBar>
+          </Toolbar>
         </AppBar>
       </ElevationScroll>
       <div className={classes.toolbarMargin} />

@@ -1,16 +1,16 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-const blue = "#4ea9ce";
-const orange = "#FFBA60";
+const red = "#ff1466";
+const orange = "#ffb900";
 
 export default createMuiTheme({
   palette: {
     common: {
-      blue: `${blue}`,
+      red: `${red}`,
       orange: `${orange}`,
     },
     primary: {
-      main: `${blue}`,
+      main: `${red}`,
     },
     secondary: {
       main: `${orange}`,
@@ -21,6 +21,8 @@ export default createMuiTheme({
       fontSize: `1rem`,
       textTransform: `none`,
       color: `#fff`,
+      fontFamily: "Robbot",
+      fontWeight: "700",
     },
     estimate: {
       fontSize: `1rem`,
