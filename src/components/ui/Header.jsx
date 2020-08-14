@@ -158,17 +158,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = () => {
+const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleChange = (e, newValue) => {
     e.preventDefault();
@@ -223,8 +221,8 @@ const Header = () => {
       onMouseOver: (e) => handleMouseOver(e),
     },
     { name: "The Revolution", link: "/revolution", activeIndex: 2 },
-    { name: "About us", link: "/about-us", activeIndex: 3 },
-    { name: "Contact us", link: "/contact-us", activeIndex: 4 },
+    { name: "About Us", link: "/about-us", activeIndex: 3 },
+    { name: "Contact Us", link: "/contact-us", activeIndex: 4 },
     {
       name: " Free Estimate",
       link: "/estimate",
@@ -251,7 +249,15 @@ const Header = () => {
           break;
       }
     });
-  }, [pathname, value, selectedIndex, menuOptions, routes]);
+  }, [
+    pathname,
+    menuOptions,
+    routes,
+    setSelectedIndex,
+    setValue,
+    selectedIndex,
+    value,
+  ]);
 
   const tabs = (
     <>
