@@ -2,18 +2,19 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 const red = "#ff1466";
 const orange = "#ffb900";
+const gray = "#5f5f5f";
 
 export default createMuiTheme({
   palette: {
     common: {
-      red: `${red}`,
-      orange: `${orange}`,
+      red: red,
+      orange: orange,
     },
     primary: {
-      main: `${red}`,
+      main: red,
     },
     secondary: {
-      main: `${orange}`,
+      main: orange,
     },
   },
   typography: {
@@ -34,8 +35,43 @@ export default createMuiTheme({
       fontFamily: "Robbot",
       fontWeight: 700,
       fontSize: "2.5rem",
-      color: `${red}`,
+      color: red,
       lineHeight: 1.5,
+    },
+    h3: {
+      fontFamily: "Robbot",
+      fontSize: "2.25rem",
+      color: red,
+      fontWeight: 700,
+    },
+    h4: {
+      fontFamily: "Robbot",
+      fontSize: "1.75rem",
+      color: red,
+      fontWeight: 700,
+    },
+    subtitle1: {
+      fontSize: "1.25rem",
+      fontWeight: 300,
+      color: gray,
+    },
+    subtitle2: {
+      fontSize: "1.25rem",
+      fontWeight: 300,
+      color: "#fff",
+    },
+    learnButton: {
+      borderColor: red,
+      color: red,
+      borderWidth: 2,
+      textTransform: "none",
+      borderRadius: 50,
+      fontSize: `1rem`,
+      width: "145px",
+      "&:hover": {
+        color: "#fff",
+        backgroundColor: red,
+      },
     },
   },
 });

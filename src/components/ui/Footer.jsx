@@ -130,7 +130,7 @@ const Footer = ({ setValue, setSelectedIndex }) => {
                   setSelectedIndex(2);
                 }}
               >
-                Mobile App Development
+                IOS/Android App Development
               </Grid>
               <Grid
                 item

@@ -68,11 +68,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
-    height: `6em`,
+    height: `5em`,
     cursor: `pointer`,
-    [theme.breakpoints.down("md")]: {
-      height: "5em",
-    },
     [theme.breakpoints.down("xs")]: {
       height: "4em",
     },
@@ -155,6 +152,9 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerItemEstimate: {
     backgroundColor: theme.palette.common.orange,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.light,
+    },
   },
   appBar: {
     zIndex: theme.zIndex.modal + 1,
@@ -200,7 +200,7 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
       selectedIndex: 1,
     },
     {
-      name: "Mobile App Development",
+      name: "IOS/Android App Development",
       link: "/mobile-apps",
       activeIndex: 1,
       selectedIndex: 2,
