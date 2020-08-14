@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   copyRightContainer: {
     position: "relative",
     zIndex: 50,
-    margin: "10px",
+    margin: "30px 10px 0",
   },
   copyRight: {
     color: "#fff",

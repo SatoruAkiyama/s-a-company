@@ -30,5 +30,12 @@ export default createMuiTheme({
       color: "#fff",
       borderRadius: `50px`,
     },
+    h2: {
+      fontFamily: "Robbot",
+      fontWeight: 700,
+      fontSize: "2.5rem",
+      color: `${red}`,
+      lineHeight: 1.5,
+    },
   },
 });
