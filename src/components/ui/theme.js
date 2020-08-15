@@ -2,7 +2,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 const red = "#ff1466";
 const orange = "#ffb900";
-const gray = "#5f5f5f";
+const gray = "#818181";
 
 export default createMuiTheme({
   palette: {
@@ -59,6 +59,12 @@ export default createMuiTheme({
       fontSize: "1.25rem",
       fontWeight: 300,
       color: "#fff",
+    },
+    body1: {
+      fontSize: "1.25rem",
+      color: gray,
+      fontWeight: 300,
+      fontFamily: "Robbot",
     },
     learnButton: {
       borderColor: red,

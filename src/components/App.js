@@ -6,10 +6,13 @@ import theme from "./ui/theme";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
 import LandingPage from "./pages/LandingPage";
+import ServicesPage from "./pages/ServicesPage";
+import CustomSoftwarePage from "./pages/CustomSoftwarePage";
 
 const App = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [value, setValue] = useState(0);
+
   return (
     <ThemeProvider theme={theme}>
       <Header
@@ -29,10 +32,23 @@ const App = () => {
             />
           )}
         />
-        <Route path="/services" component={() => <div>services</div>} />
+        <Route
+          path="/services"
+          render={() => (
+            <ServicesPage
+              setValue={setValue}
+              setSelectedIndex={setSelectedIndex}
+            />
+          )}
+        />
         <Route
           path="/custom-software"
-          component={() => <div>custom-software</div>}
+          render={() => (
+            <CustomSoftwarePage
+              setValue={setValue}
+              setSelectedIndex={setSelectedIndex}
+            />
+          )}
         />
         <Route path="/mobile-apps" component={() => <div>mobile-apps</div>} />
         <Route path="/web-sites" component={() => <div>web-site</div>} />
