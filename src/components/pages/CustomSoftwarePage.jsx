@@ -1,14 +1,14 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Hidden from "@material-ui/core/Hidden";
 
 import CallToAction from "../ui/CallToAction";
+
+import ServiceHeader from "../ui/ServiceHeader";
 
 import DigitalData from "../../assets/digital-data.jpg";
 import Scale from "../../assets/scale.jpg";
@@ -18,7 +18,7 @@ import Ux from "../../assets/ux.png";
 
 const useStyes = makeStyles((theme) => ({
   mainContainer: {
-    marginTop: "4em",
+    marginTop: "6em",
     [theme.breakpoints.down("xs")]: {
       marginTop: "2em",
     },
@@ -42,101 +42,61 @@ const CustomSoftwarePage = ({ setSelectedIndex, setValue }) => {
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
-  const history = useHistory();
   return (
     <>
       <Container maxWidth="lg" className={classes.mainContainer}>
-        <Grid container direction="column">
-          {/* heading */}
-          <Grid item container direction="row" style={{ marginBottom: "6em" }}>
-            <Hidden smDown>
-              <Grid item className={classes.arrowContainer}>
-                <Typography
-                  variant="h4"
-                  style={{ cursor: "pointer", marginRight: "0.75em" }}
-                  onClick={() => {
-                    history.push("/services");
-                    setSelectedIndex(0);
-                  }}
-                >
-                  &#8592; Services
-                </Typography>
-              </Grid>
-            </Hidden>
-            <Grid item container direction="column" className={classes.text}>
-              <Grid item>
-                <Typography
-                  variant="h3"
-                  align={matchesSM ? "center" : undefined}
-                  paragraph
-                >
-                  Custom Software Development
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography
-                  variant="body1"
-                  align={matchesSM ? "center" : undefined}
-                  paragraph
-                >
-                  Whether we’re replacing old software or inventing new
-                  solutions, Arc Development is here to help your business
-                  tackle technology.
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography
-                  variant="body1"
-                  align={matchesSM ? "center" : undefined}
-                  paragraph
-                >
-                  Using regular commercial software leaves you with a lot of
-                  stuff you don’t need, without some of the stuff you do need,
-                  and ultimately controls the way you work. Without using any
-                  software at all you risk falling behind competitors and
-                  missing out on huge savings from increased efficiency.
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography
-                  variant="body1"
-                  align={matchesSM ? "center" : undefined}
-                  paragraph
-                >
-                  Our custom solutions are designed from the ground up with your
-                  needs, wants, and goals at the core. This collaborative
-                  process produces finely tuned software that is much more
-                  effective at improving your workflow and reducing costs than
-                  generalized options.
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography
-                  variant="body1"
-                  align={matchesSM ? "center" : undefined}
-                  paragraph
-                >
-                  We create exactly what you what, exactly how you want it.
-                </Typography>
-              </Grid>
-            </Grid>
-            <Hidden smDown>
-              <Grid item className={classes.arrowContainer}>
-                <Typography
-                  variant="h4"
-                  style={{ cursor: "pointer", marginLeft: "0.75em" }}
-                  onClick={() => {
-                    history.push("/mobile-apps");
-                    setSelectedIndex(2);
-                  }}
-                >
-                  &#8594; IOS/Android App <br /> &nbsp;&nbsp;
-                  &nbsp;&nbsp;Development
-                </Typography>
-              </Grid>
-            </Hidden>
+        <ServiceHeader
+          setSelectedIndex={setSelectedIndex}
+          next="IOS/Android App"
+          nextLink="/mobile-apps"
+          title="Custom Software Development"
+          nextSelectIndex="2"
+        >
+          <Grid item>
+            <Typography
+              variant="body1"
+              align={matchesSM ? "center" : undefined}
+              paragraph
+            >
+              Whether we’re replacing old software or inventing new solutions,
+              Arc Development is here to help your business tackle technology.
+            </Typography>
           </Grid>
-
+          <Grid item>
+            <Typography
+              variant="body1"
+              align={matchesSM ? "center" : undefined}
+              paragraph
+            >
+              Using regular commercial software leaves you with a lot of stuff
+              you don’t need, without some of the stuff you do need, and
+              ultimately controls the way you work.
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              variant="body1"
+              align={matchesSM ? "center" : undefined}
+              paragraph
+            >
+              Our custom solutions are designed from the ground up with your
+              needs, wants, and goals at the core. This collaborative process
+              produces finely tuned software that is much more effective at
+              improving your workflow and reducing costs than generalized
+              options.
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              variant="body1"
+              align={matchesSM ? "center" : undefined}
+              paragraph
+            >
+              We create exactly what you what, exactly how you want it.
+            </Typography>
+          </Grid>
+        </ServiceHeader>
+        <Grid container direction="column">
           {/* middle */}
           <Grid
             item
@@ -317,25 +277,22 @@ const CustomSoftwarePage = ({ setSelectedIndex, setValue }) => {
             <Grid item style={{ textAlign: "center" }}>
               <img src={Root} alt="" width="320px" height="300px" />
             </Grid>
-            <Grid item container direction="column">
-              <Grid item>
-                <Typography align="center" variant="h4">
-                  Root-Cause Analysis
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography align="center" variant="body1" paragraph>
-                  Many problems are merely symptoms of larger, underlying
-                  issues.
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography align="center" variant="body1" paragraph>
-                  We can help you thoroughly examine all areas of your business
-                  to develop a holistic plan for the most effective
-                  implementation of technology.
-                </Typography>
-              </Grid>
+            <Grid item>
+              <Typography align="center" variant="h4">
+                Root-Cause Analysis
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography align="center" variant="body1" paragraph>
+                Many problems are merely symptoms of larger, underlying issues.
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography align="center" variant="body1" paragraph>
+                We can help you thoroughly examine all areas of your business to
+                develop a holistic plan for the most effective implementation of
+                technology.
+              </Typography>
             </Grid>
           </Grid>
 

@@ -178,7 +178,8 @@ const ServicesPage = ({ setValue, setSelectedIndex }) => {
                 Reach More. Discover More. Sell More.
               </Typography>
               <Typography variant="subtitle1" className={classes.subtitle}>
-                Optimized for Search Engines, built for speed.
+                Optimized for Search Engines, built for speed. Beautiful design,
+                good UI/UX.
               </Typography>
               <Button
                 variant="outlined"
