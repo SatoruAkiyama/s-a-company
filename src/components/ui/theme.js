@@ -61,7 +61,7 @@ export default createMuiTheme({
       color: "#fff",
     },
     body1: {
-      fontSize: "1.25rem",
+      fontSize: "1.2rem",
       color: gray,
       fontWeight: 300,
       fontFamily: "Robbot",

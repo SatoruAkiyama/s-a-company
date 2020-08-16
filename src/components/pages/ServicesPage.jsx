@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
   },
   mainContainer: {
-    marginTop: "5em",
+    marginTop: "4em",
     [theme.breakpoints.down("xs")]: {
-      marginTop: "3em",
+      marginTop: "2em",
     },
   },
   heroTextContainer: {

@@ -18,7 +18,7 @@ import Ux from "../../assets/ux.png";
 
 const useStyes = makeStyles((theme) => ({
   mainContainer: {
-    marginTop: "6em",
+    marginTop: "4em",
     [theme.breakpoints.down("xs")]: {
       marginTop: "2em",
     },

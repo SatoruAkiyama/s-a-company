@@ -17,7 +17,7 @@ import Extend3 from "../../assets/extend3.png";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
-    marginTop: "6em",
+    marginTop: "4em",
     [theme.breakpoints.down("xs")]: {
       marginTop: "2em",
     },

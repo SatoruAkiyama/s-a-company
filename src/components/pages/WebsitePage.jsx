@@ -17,7 +17,7 @@ import SEO from "../../assets/seo.png";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
-    marginTop: "6em",
+    marginTop: "4em",
     [theme.breakpoints.down("xs")]: {
       marginTop: "2em",
     },

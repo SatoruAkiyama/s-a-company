@@ -12,6 +12,7 @@ import ServicesPage from "./pages/ServicesPage";
 import CustomSoftwarePage from "./pages/CustomSoftwarePage";
 import IOSandAndroidPage from "./pages/IOSandAndroidPage";
 import WebsitePage from "./pages/WebsitePage";
+import RevolutionPage from "./pages/RevolutionPage";
 
 const App = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -72,7 +73,10 @@ const App = () => {
             />
           )}
         />
-        <Route path="/revolution" component={() => <div>revoluotion</div>} />
+        <Route
+          path="/revolution"
+          render={() => <RevolutionPage setValue={setValue} />}
+        />
         <Route path="/about-us" component={() => <div>about</div>} />
         <Route path="/contact-us" component={() => <div>contact</div>} />
         <Route path="/estimate" component={() => <div>estimate</div>} />
