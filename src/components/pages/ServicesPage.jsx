@@ -55,14 +55,10 @@ const ServicesPage = ({ setValue, setSelectedIndex }) => {
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" className={classes.mainContainer}>
       <Grid container direction="column">
         <Grid item>
-          <Typography
-            variant="h2"
-            style={{ marginTop: matchesSM ? "1em" : "2em" }}
-            align={matchesSM ? "center" : undefined}
-          >
+          <Typography variant="h2" align={matchesSM ? "center" : undefined}>
             Services
           </Typography>
         </Grid>

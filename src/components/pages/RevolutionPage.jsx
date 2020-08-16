@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 const RevolutionPage = ({ setValue }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <Grid container direction="column" className={classes.mainContainer}>

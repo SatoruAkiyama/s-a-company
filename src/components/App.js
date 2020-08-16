@@ -13,6 +13,7 @@ import CustomSoftwarePage from "./pages/CustomSoftwarePage";
 import IOSandAndroidPage from "./pages/IOSandAndroidPage";
 import WebsitePage from "./pages/WebsitePage";
 import RevolutionPage from "./pages/RevolutionPage";
+import AboutUsPage from "./pages/AboutUsPage";
 
 const App = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -77,7 +78,10 @@ const App = () => {
           path="/revolution"
           render={() => <RevolutionPage setValue={setValue} />}
         />
-        <Route path="/about-us" component={() => <div>about</div>} />
+        <Route
+          path="/about-us"
+          render={() => <AboutUsPage setValue={setValue} />}
+        />
         <Route path="/contact-us" component={() => <div>contact</div>} />
         <Route path="/estimate" component={() => <div>estimate</div>} />
       </Switch>
