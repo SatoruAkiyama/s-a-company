@@ -50,7 +50,7 @@ const CustomSoftwarePage = ({ setSelectedIndex, setValue }) => {
           next="IOS/Android App"
           nextLink="/mobile-apps"
           title="Custom Software Development"
-          nextSelectIndex="2"
+          nextSelectIndex={2}
         >
           <Grid item>
             <Typography
@@ -111,7 +111,7 @@ const CustomSoftwarePage = ({ setSelectedIndex, setValue }) => {
               md
               direction="column"
               alignItems="center"
-              style={{ marginBottom: "3em" }}
+              style={{ marginBottom: matchesSM ? "3em" : undefined }}
             >
               <Grid item>
                 <Typography variant="h4">Save Energy</Typography>
@@ -131,7 +131,7 @@ const CustomSoftwarePage = ({ setSelectedIndex, setValue }) => {
               md
               direction="column"
               alignItems="center"
-              style={{ marginBottom: "3em" }}
+              style={{ marginBottom: matchesSM ? "3em" : undefined }}
             >
               <Grid item>
                 <Typography variant="h4">Save Time</Typography>
@@ -145,14 +145,7 @@ const CustomSoftwarePage = ({ setSelectedIndex, setValue }) => {
                 />
               </Grid>
             </Grid>
-            <Grid
-              item
-              container
-              md
-              direction="column"
-              alignItems="center"
-              style={{ marginBottom: "3em" }}
-            >
+            <Grid item container md direction="column" alignItems="center">
               <Grid item>
                 <Typography variant="h4">Save Money</Typography>
               </Grid>

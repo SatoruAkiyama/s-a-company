@@ -77,7 +77,7 @@ const ServiceHeader = ({
               style={{ cursor: "pointer", marginLeft: "0.75em" }}
               onClick={() => {
                 history.push(`${nextLink}`);
-                setSelectedIndex({ nextSelectIndex });
+                setSelectedIndex(nextSelectIndex);
               }}
             >
               &#8594; {next} <br /> &nbsp;&nbsp; &nbsp;&nbsp;Development

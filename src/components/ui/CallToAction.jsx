@@ -74,7 +74,7 @@ const CallToAction = ({ setValue }) => {
                       textAlign: "center",
                     }}
                   >
-                    Simple software. <br /> Revolutionaty Results.
+                    Simple software. <br /> Revolutionary Results.
                   </Typography>
                 </Grid>
                 <Grid item>

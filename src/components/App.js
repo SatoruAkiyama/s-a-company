@@ -5,9 +5,13 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./ui/theme";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
+
+// page
 import LandingPage from "./pages/LandingPage";
 import ServicesPage from "./pages/ServicesPage";
 import CustomSoftwarePage from "./pages/CustomSoftwarePage";
+import IOSandAndroidPage from "./pages/IOSandAndroidPage";
+import WebsitePage from "./pages/WebsitePage";
 
 const App = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -50,8 +54,24 @@ const App = () => {
             />
           )}
         />
-        <Route path="/mobile-apps" component={() => <div>mobile-apps</div>} />
-        <Route path="/web-sites" component={() => <div>web-site</div>} />
+        <Route
+          path="/mobile-apps"
+          render={() => (
+            <IOSandAndroidPage
+              setSelectedIndex={setSelectedIndex}
+              setValue={setValue}
+            />
+          )}
+        />
+        <Route
+          path="/web-sites"
+          render={() => (
+            <WebsitePage
+              setValue={setValue}
+              setSelectedIndex={setSelectedIndex}
+            />
+          )}
+        />
         <Route path="/revolution" component={() => <div>revoluotion</div>} />
         <Route path="/about-us" component={() => <div>about</div>} />
         <Route path="/contact-us" component={() => <div>contact</div>} />
