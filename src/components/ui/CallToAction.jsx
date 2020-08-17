@@ -16,9 +16,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.25rem",
     margin: "10px auto",
     color: "#fff",
-    [theme.breakpoints.down("xs")]: {
-      backgroundColor: theme.palette.primary.main,
-    },
   },
   background: {
     backgroundImage: `url("https://images.pexels.com/photos/210012/pexels-photo-210012.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")`,

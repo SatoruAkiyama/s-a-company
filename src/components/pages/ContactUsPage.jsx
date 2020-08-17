@@ -13,6 +13,12 @@ import { useMediaQuery } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 
+// circular
+import CircularProgress from "@material-ui/core/CircularProgress";
+
+//snackbar
+import Snackbar from "@material-ui/core/Snackbar";
+
 // icon
 import PhoneIcon from "@material-ui/icons/Phone";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
@@ -52,9 +58,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.25rem",
     margin: "10px auto",
     color: "#fff",
-    [theme.breakpoints.down("xs")]: {
-      backgroundColor: theme.palette.primary.main,
-    },
   },
   message: {
     border: `1.5px solid ${theme.palette.common.orange}`,
@@ -99,6 +102,16 @@ const ContactUsPage = ({ setValue }) => {
   const { emailHelper, phoneHelper } = helper;
 
   const [dialogOpen, setDialog] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  const [snackBar, setSnackbar] = useState({
+    snackbarOpen: false,
+    snackbarMessage: "",
+    snackbarBackgroundColor: "",
+  });
+
+  const { snackbarOpen, snackbarMessage, snackbarBackgroundColor } = snackBar;
 
   // ————-——EMAIL——————————
   // /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
@@ -158,10 +171,34 @@ const ContactUsPage = ({ setValue }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     axios
       .post("https://fir-a-company.firebaseio.com/contact.json", form)
-      .then(() => console.log(form))
-      .catch((error) => console.log(error.message));
+      .then(() => {
+        setLoading(false);
+        setForm({
+          ...form,
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+        setSnackbar({
+          ...snackBar,
+          snackbarOpen: true,
+          snackbarMessage: "Message sent successfully!",
+          snackbarBackgroundColor: "#4bb543",
+        });
+      })
+      .catch((error) => {
+        setLoading(false);
+        setSnackbar({
+          ...snackBar,
+          snackbarOpen: true,
+          snackbarMessage: "There were error, please try again.",
+          snackbarBackgroundColor: "#ff0000",
+        });
+      });
   };
 
   return (
@@ -327,6 +364,21 @@ const ContactUsPage = ({ setValue }) => {
           },
         }}
       >
+        <Snackbar
+          open={snackbarOpen}
+          message={snackbarMessage}
+          ContentProps={{ style: { backgroundColor: snackbarBackgroundColor } }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          onClose={() =>
+            setSnackbar({
+              ...snackBar,
+              snackbarOpen: false,
+              snackbarMessage: "",
+              snackbarBackgroundColor: "",
+            })
+          }
+          autoHideDuration={3000}
+        />
         <DialogContent>
           <Grid container direction="column">
             <Grid item>
@@ -415,7 +467,14 @@ const ContactUsPage = ({ setValue }) => {
                 }
                 className={classes.sendButton}
               >
-                Send Message&nbsp; &nbsp; <SendIcon />
+                {loading ? (
+                  <CircularProgress size={30} color="inherit" />
+                ) : (
+                  <>
+                    Send Message&nbsp; &nbsp;
+                    <SendIcon />
+                  </>
+                )}
               </Button>
             </Grid>
           </Grid>
