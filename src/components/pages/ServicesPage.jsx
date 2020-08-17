@@ -8,6 +8,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
+import CallToAction from "../ui/CallToAction";
+
 import Service1 from "../../assets/service1.jpg";
 import Service2 from "../../assets/service2.jpg";
 import Service3 from "../../assets/service3.jpg";
@@ -55,154 +57,164 @@ const ServicesPage = ({ setValue, setSelectedIndex }) => {
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Container maxWidth="lg" className={classes.mainContainer}>
-      <Grid container direction="column">
-        <Grid item>
-          <Typography variant="h2" align={matchesSM ? "center" : undefined}>
-            Services
-          </Typography>
-        </Grid>
-        {/* service1  */}
-        <Grid item className={classes.serviceContainer}>
-          <Grid
-            container
-            direction="row"
-            alignItems="center"
-            justify={matchesSM ? "center" : "flex-end"}
-            className="service1"
-          >
+    <>
+      <Container maxWidth="lg" className={classes.mainContainer}>
+        <Grid container direction="column">
+          <Grid item>
+            <Typography variant="h2" align={matchesSM ? "center" : undefined}>
+              Services
+            </Typography>
+          </Grid>
+          {/* service1  */}
+          <Grid item className={classes.serviceContainer}>
             <Grid
-              item
-              style={{
-                textAlign: matchesSM ? "center" : undefined,
-                width: matchesSM ? undefined : "35em",
-              }}
+              container
+              direction="row"
+              alignItems="center"
+              justify={matchesSM ? "center" : "flex-end"}
+              className="service1"
             >
-              <Typography variant="h4">Custom Software Development</Typography>
-              <Typography variant="subtitle1" className={classes.subtitle}>
-                Save Energy. Save Tiem. Save Money
-              </Typography>
-              <Typography variant="subtitle1" className={classes.subtitle}>
-                Complete digital solutions, from investigation to{" "}
-                <span className={classes.specialText}>Celebration</span>.
-              </Typography>
-              <Button
-                variant="outlined"
-                className={classes.learnButton}
-                component={Link}
-                to="/custom-software"
-                onClick={() => {
-                  setValue(1);
-                  setSelectedIndex(1);
+              <Grid
+                item
+                style={{
+                  textAlign: matchesSM ? "center" : undefined,
+                  width: matchesSM ? undefined : "35em",
                 }}
               >
-                Learn More
-              </Button>
-            </Grid>
-            <Grid item>
-              <img
-                className={classes.icon}
-                width="250px"
-                height="140px"
-                src={Service1}
-                alt="service1"
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-
-        {/* service2 */}
-        <Grid item className={classes.serviceContainer}>
-          <Grid
-            container
-            direction="row"
-            alignItems="center"
-            justify={matchesSM ? "center" : undefined}
-          >
-            <Grid item style={{ textAlign: matchesSM ? "center" : undefined }}>
-              <Typography variant="h4">IOS/Android Development</Typography>
-              <Typography variant="subtitle1" className={classes.subtitle}>
-                Extend Functionality. Extend Access. Increase Engagement.
-              </Typography>
-              <Typography variant="subtitle1" className={classes.subtitle}>
-                Integrate your web experience or create a standalone app <br />
-                with either mobile platform.
-              </Typography>
-              <Button
-                variant="outlined"
-                className={classes.learnButton}
-                component={Link}
-                to="/mobile-apps"
-                onClick={() => {
-                  setValue(1);
-                  setSelectedIndex(2);
-                }}
-              >
-                Learn More
-              </Button>
-            </Grid>
-            <Grid item>
-              <img
-                className={classes.icon}
-                width="250px"
-                height="140px"
-                src={Service2}
-                alt="service2"
-              />
+                <Typography variant="h4">
+                  Custom Software Development
+                </Typography>
+                <Typography variant="subtitle1" className={classes.subtitle}>
+                  Save Energy. Save Tiem. Save Money
+                </Typography>
+                <Typography variant="subtitle1" className={classes.subtitle}>
+                  Complete digital solutions, from investigation to{" "}
+                  <span className={classes.specialText}>Celebration</span>.
+                </Typography>
+                <Button
+                  variant="outlined"
+                  className={classes.learnButton}
+                  component={Link}
+                  to="/custom-software"
+                  onClick={() => {
+                    setValue(1);
+                    setSelectedIndex(1);
+                  }}
+                >
+                  Learn More
+                </Button>
+              </Grid>
+              <Grid item>
+                <img
+                  className={classes.icon}
+                  width="250px"
+                  height="140px"
+                  src={Service1}
+                  alt="service1"
+                />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
 
-        {/* service3  */}
-        <Grid item className={classes.serviceContainer}>
-          <Grid
-            container
-            direction="row"
-            alignItems="center"
-            justify={matchesSM ? "center" : "flex-end"}
-            style={{ marginBottom: "10em" }}
-          >
+          {/* service2 */}
+          <Grid item className={classes.serviceContainer}>
             <Grid
-              item
-              style={{
-                textAlign: matchesSM ? "center" : undefined,
-                width: matchesSM ? undefined : "35em",
-              }}
+              container
+              direction="row"
+              alignItems="center"
+              justify={matchesSM ? "center" : undefined}
             >
-              <Typography variant="h4">Website Development</Typography>
-              <Typography variant="subtitle1" className={classes.subtitle}>
-                Reach More. Discover More. Sell More.
-              </Typography>
-              <Typography variant="subtitle1" className={classes.subtitle}>
-                Optimized for Search Engines, built for speed. Beautiful design,
-                good UI/UX.
-              </Typography>
-              <Button
-                variant="outlined"
-                className={classes.learnButton}
-                component={Link}
-                to="/web-sites"
-                onClick={() => {
-                  setValue(1);
-                  setSelectedIndex(3);
+              <Grid
+                item
+                style={{ textAlign: matchesSM ? "center" : undefined }}
+              >
+                <Typography variant="h4">IOS/Android Development</Typography>
+                <Typography variant="subtitle1" className={classes.subtitle}>
+                  Extend Functionality. Extend Access. Increase Engagement.
+                </Typography>
+                <Typography variant="subtitle1" className={classes.subtitle}>
+                  Integrate your web experience or create a standalone app{" "}
+                  <br />
+                  with either mobile platform.
+                </Typography>
+                <Button
+                  variant="outlined"
+                  className={classes.learnButton}
+                  component={Link}
+                  to="/mobile-apps"
+                  onClick={() => {
+                    setValue(1);
+                    setSelectedIndex(2);
+                  }}
+                >
+                  Learn More
+                </Button>
+              </Grid>
+              <Grid item>
+                <img
+                  className={classes.icon}
+                  width="250px"
+                  height="140px"
+                  src={Service2}
+                  alt="service2"
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+
+          {/* service3  */}
+          <Grid item className={classes.serviceContainer}>
+            <Grid
+              container
+              direction="row"
+              alignItems="center"
+              justify={matchesSM ? "center" : "flex-end"}
+              style={{ marginBottom: "10em" }}
+            >
+              <Grid
+                item
+                style={{
+                  textAlign: matchesSM ? "center" : undefined,
+                  width: matchesSM ? undefined : "35em",
                 }}
               >
-                Learn More
-              </Button>
-            </Grid>
-            <Grid item>
-              <img
-                className={classes.icon}
-                width="250px"
-                height="140px"
-                src={Service3}
-                alt="service3"
-              />
+                <Typography variant="h4">Website Development</Typography>
+                <Typography variant="subtitle1" className={classes.subtitle}>
+                  Reach More. Discover More. Sell More.
+                </Typography>
+                <Typography variant="subtitle1" className={classes.subtitle}>
+                  Optimized for Search Engines, built for speed. Beautiful
+                  design, good UI/UX.
+                </Typography>
+                <Button
+                  variant="outlined"
+                  className={classes.learnButton}
+                  component={Link}
+                  to="/web-sites"
+                  onClick={() => {
+                    setValue(1);
+                    setSelectedIndex(3);
+                  }}
+                >
+                  Learn More
+                </Button>
+              </Grid>
+              <Grid item>
+                <img
+                  className={classes.icon}
+                  width="250px"
+                  height="140px"
+                  src={Service3}
+                  alt="service3"
+                />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+      {/* call to action */}
+      <CallToAction setValue={setValue} />
+    </>
   );
 };
 

@@ -14,6 +14,7 @@ import IOSandAndroidPage from "./pages/IOSandAndroidPage";
 import WebsitePage from "./pages/WebsitePage";
 import RevolutionPage from "./pages/RevolutionPage";
 import AboutUsPage from "./pages/AboutUsPage";
+import ContacuUsPage from "./pages/ContactUsPage";
 
 const App = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -82,7 +83,10 @@ const App = () => {
           path="/about-us"
           render={() => <AboutUsPage setValue={setValue} />}
         />
-        <Route path="/contact-us" component={() => <div>contact</div>} />
+        <Route
+          path="/contact-us"
+          render={() => <ContacuUsPage setValue={setValue} />}
+        />
         <Route path="/estimate" component={() => <div>estimate</div>} />
       </Switch>
       <Footer setValue={setValue} setSelectedIndex={setSelectedIndex} />

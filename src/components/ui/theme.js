@@ -85,4 +85,25 @@ export default createMuiTheme({
       color: gray,
     },
   },
+  overrides: {
+    MuiInputLabel: {
+      root: {
+        fontSize: "0.9rem",
+      },
+    },
+    MuiInput: {
+      root: {
+        color: gray,
+        fontWeight: 300,
+      },
+      underline: {
+        "&:before": {
+          borderBottom: `1.5px solid ${orange}`,
+        },
+        "&:hover:not($disabled):not($focused):not($error):before": {
+          borderBottom: `1.5px solid ${orange}`,
+        },
+      },
+    },
+  },
 });
