@@ -168,12 +168,26 @@ const ContactUsPage = ({ setValue }) => {
         break;
     }
   };
+  const encode = (data) => {
+    return Object.keys(data)
+      .map(
+        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+      )
+      .join("&");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     axios
       .post("https://fir-a-company.firebaseio.com/contact.json", form)
+      .then(() => {
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({ "form-name": "contact", form }),
+        });
+      })
       .then(() => {
         setLoading(false);
         setForm({
