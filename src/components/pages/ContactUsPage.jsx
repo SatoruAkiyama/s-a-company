@@ -402,6 +402,7 @@ const ContactUsPage = ({ setValue }) => {
             data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
           >
+            <input type="hidden" name="form-name" value="contact" />
             <Grid container direction="column">
               <Grid item>
                 <Typography variant="h4" gutterBottom align="center">
