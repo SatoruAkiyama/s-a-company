@@ -180,7 +180,7 @@ const ServicesPage = ({ setValue, setSelectedIndex }) => {
               >
                 <Typography variant="h4">Website Development</Typography>
                 <Typography variant="subtitle1" className={classes.subtitle}>
-                  Reach More. Discover More. Sell More.
+                  Reach More. Discover More. Sell More..
                 </Typography>
                 <Typography variant="subtitle1" className={classes.subtitle}>
                   Optimized for Search Engines, built for speed. Beautiful
