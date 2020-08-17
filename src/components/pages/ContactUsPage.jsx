@@ -168,6 +168,7 @@ const ContactUsPage = ({ setValue }) => {
         break;
     }
   };
+
   const encode = (data) => {
     return Object.keys(data)
       .map(
@@ -394,104 +395,111 @@ const ContactUsPage = ({ setValue }) => {
           autoHideDuration={3000}
         />
         <DialogContent>
-          <Grid container direction="column">
-            <Grid item>
-              <Typography variant="h4" gutterBottom align="center">
-                Confirm Message
-              </Typography>
-            </Grid>
-            <Grid item container direction="column" spacing={2}>
+          <form
+            name="contact"
+            method="post"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            onSubmit={handleSubmit}
+          >
+            <Grid container direction="column">
               <Grid item>
+                <Typography variant="h4" gutterBottom align="center">
+                  Confirm Message
+                </Typography>
+              </Grid>
+              <Grid item container direction="column" spacing={2}>
+                <Grid item>
+                  <TextField
+                    label="Name"
+                    id="name"
+                    name="name"
+                    value={name}
+                    onChange={handleChange}
+                    type="text"
+                    required
+                    color="secondary"
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    label="Email"
+                    id="email"
+                    name="email"
+                    value={email}
+                    onChange={handleChange}
+                    error={emailHelper.length !== 0}
+                    helperText={emailHelper}
+                    type="email"
+                    required
+                    color="secondary"
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    label="Phone Number"
+                    id="phone"
+                    name="phone"
+                    value={phone}
+                    onChange={handleChange}
+                    error={phoneHelper.length !== 0}
+                    helperText={phoneHelper}
+                    type="tel"
+                    required
+                    color="secondary"
+                  />
+                </Grid>
+              </Grid>
+              <Grid item container direction="column">
                 <TextField
-                  label="Name"
-                  id="name"
-                  name="name"
-                  value={name}
-                  onChange={handleChange}
+                  InputProps={{ disableUnderline: true }}
+                  id="message"
+                  name="message"
                   type="text"
                   required
-                  color="secondary"
-                />
-              </Grid>
-              <Grid item>
-                <TextField
-                  label="Email"
-                  id="email"
-                  name="email"
-                  value={email}
+                  value={message}
                   onChange={handleChange}
-                  error={emailHelper.length !== 0}
-                  helperText={emailHelper}
-                  type="email"
-                  required
+                  multiline
+                  rows={6}
+                  className={classes.message}
                   color="secondary"
                 />
               </Grid>
+            </Grid>
+            <Grid item container>
               <Grid item>
-                <TextField
-                  label="Phone Number"
-                  id="phone"
-                  name="phone"
-                  value={phone}
-                  onChange={handleChange}
-                  error={phoneHelper.length !== 0}
-                  helperText={phoneHelper}
-                  type="tel"
-                  required
+                <Button
+                  onClick={() => setDialog(false)}
                   color="secondary"
-                />
+                  style={{ fontWeight: 300 }}
+                >
+                  Cancel
+                </Button>
+              </Grid>
+              <Grid item container justify="center">
+                <Button
+                  variant="contained"
+                  type="submit"
+                  disabled={
+                    name === "" ||
+                    message === "" ||
+                    phoneHelper !== "" ||
+                    emailHelper !== ""
+                  }
+                  className={classes.sendButton}
+                >
+                  {loading ? (
+                    <CircularProgress size={30} color="inherit" />
+                  ) : (
+                    <>
+                      Send Message&nbsp; &nbsp;
+                      <SendIcon />
+                    </>
+                  )}
+                </Button>
               </Grid>
             </Grid>
-            <Grid item container direction="column">
-              <TextField
-                InputProps={{ disableUnderline: true }}
-                id="message"
-                name="message"
-                type="text"
-                required
-                value={message}
-                onChange={handleChange}
-                multiline
-                rows={6}
-                className={classes.message}
-                color="secondary"
-              />
-            </Grid>
-          </Grid>
-          <Grid item container>
-            <Grid item>
-              <Button
-                onClick={() => setDialog(false)}
-                color="secondary"
-                style={{ fontWeight: 300 }}
-              >
-                Cancel
-              </Button>
-            </Grid>
-            <Grid item container justify="center">
-              <Button
-                variant="contained"
-                type="submit"
-                onClick={handleSubmit}
-                disabled={
-                  name === "" ||
-                  message === "" ||
-                  phoneHelper !== "" ||
-                  emailHelper !== ""
-                }
-                className={classes.sendButton}
-              >
-                {loading ? (
-                  <CircularProgress size={30} color="inherit" />
-                ) : (
-                  <>
-                    Send Message&nbsp; &nbsp;
-                    <SendIcon />
-                  </>
-                )}
-              </Button>
-            </Grid>
-          </Grid>
+          </form>
         </DialogContent>
       </Dialog>
       {/* estimate and revolution */}
