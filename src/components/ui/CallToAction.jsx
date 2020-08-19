@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundAttachment: "fixed",
     height: "100%",
     width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      backgroundAttachment: "initial",
+    },
   },
   estimate: {
     ...theme.typography.estimate,

@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       paddingBottom: 0,
     },
+    [theme.breakpoints.down("sm")]: {
+      backgroundAttachment: "initial",
+    },
   },
   estimate: {
     ...theme.typography.estimate,
@@ -180,15 +183,13 @@ const ContactUsPage = ({ setValue }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", form }),
+    });
     axios
       .post("https://fir-a-company.firebaseio.com/contact.json", form)
-      .then(() => {
-        fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "contact", form }),
-        });
-      })
       .then(() => {
         setLoading(false);
         setForm({
@@ -204,6 +205,9 @@ const ContactUsPage = ({ setValue }) => {
           snackbarMessage: "Message sent successfully!",
           snackbarBackgroundColor: "#4bb543",
         });
+        setTimeout(() => {
+          setDialog(false);
+        }, 2000);
       })
       .catch((error) => {
         setLoading(false);
@@ -402,7 +406,6 @@ const ContactUsPage = ({ setValue }) => {
             data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
           >
-            <input type="hidden" name="form-name" value="contact" />
             <Grid container direction="column">
               <Grid item>
                 <Typography variant="h4" gutterBottom align="center">
@@ -464,6 +467,7 @@ const ContactUsPage = ({ setValue }) => {
                   rows={6}
                   className={classes.message}
                   color="secondary"
+                  placeholder="Tell us more about your project"
                 />
               </Grid>
             </Grid>

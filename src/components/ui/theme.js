@@ -50,6 +50,13 @@ export default createMuiTheme({
       color: red,
       fontWeight: 700,
     },
+    h6: {
+      fontFamily: "Robbot",
+      fontSize: "1rem",
+      color: red,
+      fontWeight: 500,
+      lineHeight: 1,
+    },
     subtitle1: {
       fontSize: "1.25rem",
       fontWeight: 300,
