@@ -79,6 +79,18 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.light,
     },
   },
+  mainContainer: {
+    opacity: 0,
+    animation: "$fade-in 1s forwards",
+  },
+  "@keyframes fade-in": {
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
+    },
+  },
 }));
 
 const ContactUsPage = ({ setValue }) => {
@@ -224,7 +236,11 @@ const ContactUsPage = ({ setValue }) => {
   };
 
   return (
-    <Grid container direction={matchesMD ? "column" : "row"}>
+    <Grid
+      container
+      direction={matchesMD ? "column" : "row"}
+      className={classes.mainContainer}
+    >
       {/* contact */}
       <Grid
         item

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 
@@ -9,21 +9,20 @@ import Footer from "./ui/Footer";
 import ErrorBoundary from "./error-boundary/ErrorBoundary";
 import ScrollTop from "./scroll-top/ScrollTop";
 
-// page
-import LandingPage from "./pages/LandingPage";
-import ServicesPage from "./pages/ServicesPage";
-import CustomSoftwarePage from "./pages/CustomSoftwarePage";
-import IOSandAndroidPage from "./pages/IOSandAndroidPage";
-import WebsitePage from "./pages/WebsitePage";
-import RevolutionPage from "./pages/RevolutionPage";
-import AboutUsPage from "./pages/AboutUsPage";
-import ContacuUsPage from "./pages/ContactUsPage";
-import EstimatePage from "./pages/EstimatePage";
-import ErrorPage from "./pages/ErrorPage";
-
 const App = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [value, setValue] = useState(0);
+
+  const LandingPage = lazy(() => import("./pages/LandingPage"));
+  const ServicesPage = lazy(() => import("./pages/ServicesPage"));
+  const CustomSoftwarePage = lazy(() => import("./pages/CustomSoftwarePage"));
+  const IOSandAndroidPage = lazy(() => import("./pages/IOSandAndroidPage"));
+  const WebsitePage = lazy(() => import("./pages/WebsitePage"));
+  const RevolutionPage = lazy(() => import("./pages/RevolutionPage"));
+  const AboutUsPage = lazy(() => import("./pages/AboutUsPage"));
+  const ContacuUsPage = lazy(() => import("./pages/ContactUsPage"));
+  const EstimatePage = lazy(() => import("./pages/EstimatePage"));
+  const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 
   return (
     <ThemeProvider theme={theme}>
@@ -35,70 +34,79 @@ const App = () => {
           setSelectedIndex={setSelectedIndex}
         />
         <ErrorBoundary>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <LandingPage
-                  setValue={setValue}
-                  setSelectedIndex={setSelectedIndex}
-                />
-              )}
-            />
-            <Route exact
-              path="/services"
-              render={() => (
-                <ServicesPage
-                  setValue={setValue}
-                  setSelectedIndex={setSelectedIndex}
-                />
-              )}
-            />
-            <Route exact
-              path="/custom-software"
-              render={() => (
-                <CustomSoftwarePage
-                  setValue={setValue}
-                  setSelectedIndex={setSelectedIndex}
-                />
-              )}
-            />
-            <Route exact
-              path="/mobile-apps"
-              render={() => (
-                <IOSandAndroidPage
-                  setSelectedIndex={setSelectedIndex}
-                  setValue={setValue}
-                />
-              )}
-            />
-            <Route exact
-              path="/web-sites"
-              render={() => (
-                <WebsitePage
-                  setValue={setValue}
-                  setSelectedIndex={setSelectedIndex}
-                />
-              )}
-            />
-            <Route exact
-              path="/revolution"
-              render={() => <RevolutionPage setValue={setValue} />}
-            />
-            <Route exact
-              path="/about-us"
-              render={() => <AboutUsPage setValue={setValue} />}
-            />
-            <Route exact
-              path="/contact-us"
-              render={() => <ContacuUsPage setValue={setValue} />}
-            />
-            <Route exact path="/estimate" component={EstimatePage} />
-            <Route render={() => <ErrorPage />} />
-          </Switch>
+          <Suspense fallback={<div style={{ minHeight: "100vh" }}></div>}>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <LandingPage
+                    setValue={setValue}
+                    setSelectedIndex={setSelectedIndex}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/services"
+                render={() => (
+                  <ServicesPage
+                    setValue={setValue}
+                    setSelectedIndex={setSelectedIndex}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/custom-software"
+                render={() => (
+                  <CustomSoftwarePage
+                    setValue={setValue}
+                    setSelectedIndex={setSelectedIndex}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/mobile-apps"
+                render={() => (
+                  <IOSandAndroidPage
+                    setSelectedIndex={setSelectedIndex}
+                    setValue={setValue}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/web-sites"
+                render={() => (
+                  <WebsitePage
+                    setValue={setValue}
+                    setSelectedIndex={setSelectedIndex}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/revolution"
+                render={() => <RevolutionPage setValue={setValue} />}
+              />
+              <Route
+                exact
+                path="/about-us"
+                render={() => <AboutUsPage setValue={setValue} />}
+              />
+              <Route
+                exact
+                path="/contact-us"
+                render={() => <ContacuUsPage setValue={setValue} />}
+              />
+              <Route exact path="/estimate" component={EstimatePage} />
+              <Route render={() => <ErrorPage />} />
+            </Switch>
+            <Footer setValue={setValue} setSelectedIndex={setSelectedIndex} />
+          </Suspense>
         </ErrorBoundary>
-        <Footer setValue={setValue} setSelectedIndex={setSelectedIndex} />
       </ScrollTop>
     </ThemeProvider>
   );

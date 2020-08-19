@@ -21,8 +21,18 @@ const useStyles = makeStyles((theme) => ({
   },
   mainContainer: {
     marginTop: "4em",
+    opacity: 0,
+    animation: "$fade-in 1s forwards",
     [theme.breakpoints.down("xs")]: {
       marginTop: "2em",
+    },
+  },
+  "@keyframes fade-in": {
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
     },
   },
   heroTextContainer: {
