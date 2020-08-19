@@ -74,7 +74,10 @@ const Footer = ({ setValue, setSelectedIndex }) => {
   return (
     <footer className={classes.footer}>
       <div className={classes.copyRightContainer}>
-        <a href="https://satoruakiyama.com" className={classes.copyRight}>
+        <a
+          href="https://s-a-company.netlify.app/"
+          className={classes.copyRight}
+        >
           &copy;2020 S-A Company
         </a>
       </div>

@@ -6,6 +6,9 @@ import theme from "./ui/theme";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
 
+import ErrorBoundary from "./error-boundary/ErrorBoundary";
+import ScrollTop from "./scroll-top/ScrollTop";
+
 // page
 import LandingPage from "./pages/LandingPage";
 import ServicesPage from "./pages/ServicesPage";
@@ -16,6 +19,7 @@ import RevolutionPage from "./pages/RevolutionPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import ContacuUsPage from "./pages/ContactUsPage";
 import EstimatePage from "./pages/EstimatePage";
+import ErrorPage from "./pages/ErrorPage";
 
 const App = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -23,74 +27,79 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header
-        value={value}
-        setValue={setValue}
-        selectedIndex={selectedIndex}
-        setSelectedIndex={setSelectedIndex}
-      />
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <LandingPage
-              setValue={setValue}
-              setSelectedIndex={setSelectedIndex}
+      <ScrollTop>
+        <Header
+          value={value}
+          setValue={setValue}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
+        />
+        <ErrorBoundary>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <LandingPage
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              )}
             />
-          )}
-        />
-        <Route
-          path="/services"
-          render={() => (
-            <ServicesPage
-              setValue={setValue}
-              setSelectedIndex={setSelectedIndex}
+            <Route exact
+              path="/services"
+              render={() => (
+                <ServicesPage
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              )}
             />
-          )}
-        />
-        <Route
-          path="/custom-software"
-          render={() => (
-            <CustomSoftwarePage
-              setValue={setValue}
-              setSelectedIndex={setSelectedIndex}
+            <Route exact
+              path="/custom-software"
+              render={() => (
+                <CustomSoftwarePage
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              )}
             />
-          )}
-        />
-        <Route
-          path="/mobile-apps"
-          render={() => (
-            <IOSandAndroidPage
-              setSelectedIndex={setSelectedIndex}
-              setValue={setValue}
+            <Route exact
+              path="/mobile-apps"
+              render={() => (
+                <IOSandAndroidPage
+                  setSelectedIndex={setSelectedIndex}
+                  setValue={setValue}
+                />
+              )}
             />
-          )}
-        />
-        <Route
-          path="/web-sites"
-          render={() => (
-            <WebsitePage
-              setValue={setValue}
-              setSelectedIndex={setSelectedIndex}
+            <Route exact
+              path="/web-sites"
+              render={() => (
+                <WebsitePage
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              )}
             />
-          )}
-        />
-        <Route
-          path="/revolution"
-          render={() => <RevolutionPage setValue={setValue} />}
-        />
-        <Route
-          path="/about-us"
-          render={() => <AboutUsPage setValue={setValue} />}
-        />
-        <Route
-          path="/contact-us"
-          render={() => <ContacuUsPage setValue={setValue} />}
-        />
-        <Route path="/estimate" component={EstimatePage} />
-      </Switch>
-      <Footer setValue={setValue} setSelectedIndex={setSelectedIndex} />
+            <Route exact
+              path="/revolution"
+              render={() => <RevolutionPage setValue={setValue} />}
+            />
+            <Route exact
+              path="/about-us"
+              render={() => <AboutUsPage setValue={setValue} />}
+            />
+            <Route exact
+              path="/contact-us"
+              render={() => <ContacuUsPage setValue={setValue} />}
+            />
+            <Route exact path="/estimate" component={EstimatePage} />
+            <Route render={() => <ErrorPage />} />
+          </Switch>
+        </ErrorBoundary>
+        <Footer setValue={setValue} setSelectedIndex={setSelectedIndex} />
+      </ScrollTop>
     </ThemeProvider>
   );
 };
