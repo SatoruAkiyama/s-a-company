@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RevolutionPage = () => {
+  useEffect(() => {
+    document.title = "-The Revolution- S-A Company";
+  }, []);
   const classes = useStyles();
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));

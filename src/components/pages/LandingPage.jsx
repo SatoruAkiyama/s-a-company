@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -103,6 +103,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LandingPage = ({ setValue, setSelectedIndex }) => {
+  useEffect(() => {
+    document.title = "S-A Company";
+  }, []);
   const classes = useStyles();
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));

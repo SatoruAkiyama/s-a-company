@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -82,6 +82,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ContactUsPage = ({ setValue }) => {
+  useEffect(() => {
+    document.title = "-Contact Us- S-A Company";
+  }, []);
   const classes = useStyles();
   const theme = useTheme();
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));

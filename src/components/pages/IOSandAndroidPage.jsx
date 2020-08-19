@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IOSandAndroidPage = ({ setSelectedIndex, setValue }) => {
+  useEffect(() => {
+    document.title = "-iOS and Android App- S-A Company";
+  }, []);
   const classes = useStyles();
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
