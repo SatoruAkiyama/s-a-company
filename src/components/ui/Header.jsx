@@ -38,6 +38,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import logo from "../../assets/logo.png";
 
+// google analytics
+import ReactGA from "react-ga";
+
 function ElevationScroll(props) {
   const { children } = props;
 
@@ -170,6 +173,7 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
+  const [previousURL, setPreviousURL] = useState();
 
   const handleChange = (e, newValue) => {
     e.preventDefault();
@@ -238,6 +242,10 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
   let pathname = history.location.pathname;
 
   useEffect(() => {
+    if (previousURL !== pathname) {
+      setPreviousURL(pathname);
+      ReactGA.pageview(window.location.pathname + window.location.search);
+    }
     [...menuOptions, ...routes].forEach((route) => {
       switch (pathname) {
         case `${route.link}`:
@@ -255,6 +263,7 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
   }, [
     pathname,
     menuOptions,
+    previousURL,
     routes,
     setSelectedIndex,
     setValue,

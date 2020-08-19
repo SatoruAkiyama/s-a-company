@@ -9,6 +9,10 @@ import Footer from "./ui/Footer";
 import ErrorBoundary from "./error-boundary/ErrorBoundary";
 import ScrollTop from "./scroll-top/ScrollTop";
 
+import ReactGA from "react-ga";
+
+ReactGA.initialize("UA-175815348-1");
+
 const App = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [value, setValue] = useState(0);
