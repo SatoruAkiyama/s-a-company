@@ -51,7 +51,7 @@ const ServiceHeader = ({
               style={{ cursor: "pointer", marginRight: "0.75em" }}
               onClick={() => {
                 history.push("/services");
-                setSelectedIndex(0);
+                setSelectedIndex(false);
               }}
             >
               &#8592; Services

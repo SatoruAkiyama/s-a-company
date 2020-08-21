@@ -55,7 +55,7 @@ const WebsitePage = ({ setSelectedIndex, setValue }) => {
           next="Custom Software"
           nextLink="/custom-software"
           title="Website Development"
-          nextSelectIndex={1}
+          nextSelectIndex={0}
         >
           <Grid item>
             <Typography

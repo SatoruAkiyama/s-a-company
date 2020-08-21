@@ -17,7 +17,6 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Button from "@material-ui/core/Button";
 
 //drawer menu
-import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 //ressponsive
@@ -40,6 +39,21 @@ import logo from "../../assets/logo.png";
 
 // google analytics
 import ReactGA from "react-ga";
+
+// advance menu
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import Grow from "@material-ui/core/Grow";
+import Paper from "@material-ui/core/Paper";
+import Popper from "@material-ui/core/Popper";
+import MenuList from "@material-ui/core/MenuList";
+
+// accordion panel
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
+import Grid from "@material-ui/core/Grid";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -67,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: "1em",
     },
     [theme.breakpoints.down("xs")]: {
-      marginBottom: "0.25em",
+      marginBottom: "0.55em",
     },
   },
   logo: {
@@ -86,7 +100,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: `25px`,
     opacity: 0.6,
     "&.Mui-selected": {
-      borderBottom: `3px solid #fff`,
       "&:hover": {
         opacity: 1,
       },
@@ -108,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.red,
     color: "white",
     borderRadius: 0,
+    zIndex: `1302`,
   },
   menuItem: {
     ...theme.typography.tab,
@@ -162,10 +176,32 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.modal + 1,
   },
+  accordion: {
+    backgroundColor: theme.palette.primary.main,
+    borderBottom: `1px solid rgba(0, 0, 0, 0.12)`,
+    "&.Mui-expanded": {
+      margin: 0,
+      borderBottom: 0,
+    },
+    "&::before": {
+      backgroundColor: "rgba(0, 0, 0, 0)",
+    },
+  },
+  accordionDetails: {
+    padding: 0,
+    backgroundColor: theme.palette.primary.light,
+  },
+  accordionSummary: {
+    "&:hover": {
+      color: "#fff",
+      backgroundColor: "#db1057",
+    },
+    backgroundColor: (value) => (value === 1 ? "rgba(0,0,0,0.14)" : "inherit"),
+  },
 }));
 
 const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
-  const classes = useStyles();
+  const classes = useStyles(value);
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -195,25 +231,31 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
     setSelectedIndex(i);
   };
 
+  const handleListKeyDown = (event) => {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpenMenu(false);
+    }
+  };
+
   const menuOptions = [
-    { name: "Services", link: "/services", activeIndex: 1, selectedIndex: 0 },
     {
       name: "Custom Software Development",
       link: "/custom-software",
       activeIndex: 1,
-      selectedIndex: 1,
+      selectedIndex: 0,
     },
     {
       name: "IOS/Android App Development",
       link: "/mobile-apps",
       activeIndex: 1,
-      selectedIndex: 2,
+      selectedIndex: 1,
     },
     {
-      name: "Website Develpment",
+      name: "Website Development",
       link: "/web-sites",
       activeIndex: 1,
-      selectedIndex: 3,
+      selectedIndex: 2,
     },
   ];
 
@@ -290,6 +332,7 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
               aria-owns={ariaOwns}
               aria-haspopup={ariaHaspopup}
               onMouseOver={onMouseOver}
+              onMouseLeave={() => setOpenMenu(false)}
             />
           ))}
       </Tabs>
@@ -304,33 +347,57 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
       >
         Free Estimate
       </Button>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
+      <Popper
         open={openMenu}
-        onClose={handleClose}
-        classes={{ paper: classes.menu }}
-        MenuListProps={{ onMouseLeave: handleClose }}
-        elevation={0}
-        keepMounted
-        style={{ zIndex: `1302` }}
+        anchorEl={anchorEl}
+        placement="bottom-start"
+        role={undefined}
+        transition
+        disablePortal
       >
-        {menuOptions.map((option, i) => (
-          <MenuItem
-            key={i}
-            component={Link}
-            to={option.link}
-            onClick={(e) => {
-              handleMenuItemClick(e, i);
-              setValue(1);
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin: "top left",
             }}
-            selected={i === selectedIndex && value === 1}
-            classes={{ root: classes.menuItem }}
           >
-            {option.name}
-          </MenuItem>
-        ))}
-      </Menu>
+            <Paper classes={{ root: classes.menu }} elevation={0}>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList
+                  onMouseLeave={handleClose}
+                  onMouseOver={() => setOpenMenu(true)}
+                  disablePadding
+                  autoFocusItem={false}
+                  id="simple-menu"
+                  onKeyDown={handleListKeyDown}
+                >
+                  {menuOptions.map((option, i) => (
+                    <MenuItem
+                      key={`${option}${i}`}
+                      component={Link}
+                      to={option.link}
+                      onClick={(e) => {
+                        handleMenuItemClick(e, i);
+                        setValue(1);
+                        handleClose();
+                      }}
+                      selected={
+                        i === selectedIndex &&
+                        value === 1 &&
+                        window.location.pathname !== "/services"
+                      }
+                      classes={{ root: classes.menuItem }}
+                    >
+                      {option.name}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
     </>
   );
 
@@ -346,32 +413,108 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
       >
         <div className={classes.toolbarMargin} />
         <List disablePadding>
-          {routes.map(({ name, link, estimate, activeIndex }, idx) => (
-            <ListItem
-              component={Link}
-              to={link}
-              key={idx}
-              divider
-              button
-              onClick={() => {
-                setOpenDrawer(false);
-                setValue(idx);
-              }}
-              className={estimate ? classes.drawerItemEstimate : null}
-              selected={value === activeIndex}
-            >
-              <ListItemText
-                disableTypography
-                className={
-                  value === activeIndex
-                    ? classes.drawerItemSelected
-                    : classes.drawerItemText
-                }
+          {routes.map(({ name, link, estimate, activeIndex }, idx) =>
+            name === "Services" ? (
+              <Accordion
+                key={idx}
+                classes={{ root: classes.accordion }}
+                elevation={0}
               >
-                {name}
-              </ListItemText>
-            </ListItem>
-          ))}
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon color="secondary" />}
+                  classes={{ root: classes.accordionSummary }}
+                >
+                  <ListItemText
+                    disableTypography
+                    className={
+                      value === activeIndex
+                        ? classes.drawerItemSelected
+                        : classes.drawerItemText
+                    }
+                    onClick={() => {
+                      history.push("/services");
+                      setOpenDrawer(false);
+                      setValue(1);
+                      setSelectedIndex(false);
+                    }}
+                  >
+                    {name}
+                  </ListItemText>
+                  {/* </ListItem> */}
+                </AccordionSummary>
+                <AccordionDetails classes={{ root: classes.accordionDetails }}>
+                  <Grid container direction="column">
+                    <Grid item>
+                      {menuOptions.map((option) => (
+                        <ListItem
+                          component={Link}
+                          to={option.link}
+                          key={option.selectedIndex}
+                          divider
+                          button
+                          onClick={() => {
+                            setOpenDrawer(false);
+                            setValue(1);
+                            setSelectedIndex(option.selectedIndex);
+                          }}
+                          selected={
+                            option.selectedIndex === selectedIndex &&
+                            value === 1 &&
+                            window.location.pathname !== "/sevices"
+                          }
+                        >
+                          <ListItemText
+                            disableTypography
+                            className={
+                              selectedIndex === option.selectedIndex &&
+                              value === 1 &&
+                              window.location.pathname !== "/sevices"
+                                ? classes.drawerItemSelected
+                                : classes.drawerItemText
+                            }
+                          >
+                            {option.name
+                              .split(" ")
+                              .filter((word) => word !== "Development")
+                              .join(" ")}
+                            <br />
+                            <span style={{ fontSize: "0.75rem" }}>
+                              Development
+                            </span>
+                          </ListItemText>
+                        </ListItem>
+                      ))}
+                    </Grid>
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
+            ) : (
+              <ListItem
+                component={Link}
+                to={link}
+                key={idx}
+                divider
+                button
+                onClick={() => {
+                  setOpenDrawer(false);
+                  setValue(idx);
+                }}
+                className={estimate ? classes.drawerItemEstimate : null}
+                selected={value === activeIndex}
+              >
+                <ListItemText
+                  disableTypography
+                  className={
+                    value === activeIndex
+                      ? classes.drawerItemSelected
+                      : classes.drawerItemText
+                  }
+                >
+                  {name}
+                </ListItemText>
+              </ListItem>
+            )
+          )}
         </List>
       </SwipeableDrawer>
       <IconButton

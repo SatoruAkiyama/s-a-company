@@ -55,7 +55,7 @@ const IOSandAndroidPage = ({ setSelectedIndex, setValue }) => {
           next="Website"
           nextLink="/web-sites"
           title="iOS/Android App Development"
-          nextSelectIndex={3}
+          nextSelectIndex={2}
         >
           <Grid item>
             <Typography

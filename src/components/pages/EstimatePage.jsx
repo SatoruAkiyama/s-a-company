@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { cloneDeep } from "lodash";
 import axios from "axios";
 
@@ -76,6 +76,8 @@ const EstimatePage = () => {
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
+  const myRef = useRef(null);
+
   const defaultQuestions = DEFAULT;
   const softwareQuestions = SOFTWARE;
   const websiteQuestions = WEBSITE;
@@ -95,6 +97,9 @@ const EstimatePage = () => {
   }, []);
 
   const nextQuestion = () => {
+    if (matchesSM) {
+      window.scrollTo(0, myRef.current.offsetTop - 90);
+    }
     const newQuestions = cloneDeep(questions);
     const currentlyActive = newQuestions.filter(
       (question) => question.active === true
@@ -108,6 +113,9 @@ const EstimatePage = () => {
     setQuestions(newQuestions);
   };
   const preQuestion = () => {
+    if (matchesSM) {
+      window.scrollTo(0, myRef.current.offsetTop - 90);
+    }
     const newQuestions = cloneDeep(questions);
     const currentlyActive = newQuestions.filter(
       (question) => question.active === true
@@ -166,16 +174,25 @@ const EstimatePage = () => {
 
     switch (newSelected.title) {
       case "Custom Software Development":
+        if (matchesSM) {
+          window.scrollTo(0, myRef.current.offsetTop - 90);
+        }
         setQuestions(softwareQuestions);
         setService(newSelected.title);
         clearEstimate();
         break;
       case "iOS/Android App Development":
+        if (matchesSM) {
+          window.scrollTo(0, myRef.current.offsetTop - 90);
+        }
         setQuestions(softwareQuestions);
         setService(newSelected.title);
         clearEstimate();
         break;
       case "Website Development":
+        if (matchesSM) {
+          window.scrollTo(0, myRef.current.offsetTop - 90);
+        }
         setQuestions(websiteQuestions);
         setService(newSelected.title);
         clearEstimate();
@@ -279,8 +296,18 @@ const EstimatePage = () => {
 
   const estimateDisabled = () => {
     const emptySelections = questions
+      .filter(
+        (question) => question.title !== "Which features do you expect to use?"
+      )
       .map((question) => question.options.filter((option) => option.selected))
       .filter((question) => question.length === 0);
+
+    const featuresSelected = questions
+      .filter(
+        (question) => question.title === "Which features do you expect to use?"
+      )
+      .map((question) => question.options.filter((option) => option.selected))
+      .filter((selection) => selection.length > 0);
 
     if (questions.length === 2) {
       if (emptySelections.length === 1) {
@@ -288,12 +315,7 @@ const EstimatePage = () => {
       } else return true;
     } else if (questions.length === 1) {
       return true;
-    } else if (
-      emptySelections.length < 3 &&
-      questions[questions.length - 1].options.filter(
-        (option) => option.selected
-      ).length !== 0
-    ) {
+    } else if (emptySelections.length === 1 && featuresSelected.length > 0) {
       return false;
     } else {
       return true;
@@ -384,21 +406,8 @@ const EstimatePage = () => {
     }
   };
 
-  const encode = (data) => {
-    return Object.keys(data)
-      .map(
-        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-      )
-      .join("&");
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "estimate", form }),
-    });
     const users = form;
     const data = {
       total,
@@ -598,6 +607,7 @@ const EstimatePage = () => {
           lg
           justify="center"
           style={{ marginTop: "6em", marginBottom: "6em" }}
+          ref={myRef}
         >
           {questions
             .filter((question) => question.active)

@@ -111,7 +111,7 @@ const ServicesPage = ({ setValue, setSelectedIndex }) => {
                   to="/custom-software"
                   onClick={() => {
                     setValue(1);
-                    setSelectedIndex(1);
+                    setSelectedIndex(0);
                   }}
                 >
                   Learn More
@@ -157,7 +157,7 @@ const ServicesPage = ({ setValue, setSelectedIndex }) => {
                   to="/mobile-apps"
                   onClick={() => {
                     setValue(1);
-                    setSelectedIndex(2);
+                    setSelectedIndex(1);
                   }}
                 >
                   Learn More
@@ -206,7 +206,7 @@ const ServicesPage = ({ setValue, setSelectedIndex }) => {
                   to="/web-sites"
                   onClick={() => {
                     setValue(1);
-                    setSelectedIndex(3);
+                    setSelectedIndex(2);
                   }}
                 >
                   Learn More

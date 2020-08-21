@@ -63,7 +63,7 @@ const CustomSoftwarePage = ({ setSelectedIndex, setValue }) => {
           next="IOS/Android App"
           nextLink="/mobile-apps"
           title="Custom Software Development"
-          nextSelectIndex={2}
+          nextSelectIndex={1}
         >
           <Grid item>
             <Typography

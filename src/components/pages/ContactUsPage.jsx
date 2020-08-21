@@ -187,22 +187,9 @@ const ContactUsPage = ({ setValue }) => {
     }
   };
 
-  const encode = (data) => {
-    return Object.keys(data)
-      .map(
-        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-      )
-      .join("&");
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", form }),
-    });
     axios
       .post("https://fir-a-company.firebaseio.com/contact.json", form)
       .then(() => {

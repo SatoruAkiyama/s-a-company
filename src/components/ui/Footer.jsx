@@ -106,7 +106,7 @@ const Footer = ({ setValue, setSelectedIndex }) => {
                 to="/services"
                 onClick={() => {
                   setValue(1);
-                  setSelectedIndex(0);
+                  setSelectedIndex(false);
                 }}
               >
                 Services
@@ -118,7 +118,7 @@ const Footer = ({ setValue, setSelectedIndex }) => {
                 to="/custom-software"
                 onClick={() => {
                   setValue(1);
-                  setSelectedIndex(1);
+                  setSelectedIndex(0);
                 }}
               >
                 Custom Software Development
@@ -130,7 +130,7 @@ const Footer = ({ setValue, setSelectedIndex }) => {
                 to="/mobile-apps"
                 onClick={() => {
                   setValue(1);
-                  setSelectedIndex(2);
+                  setSelectedIndex(1);
                 }}
               >
                 IOS/Android App Development
@@ -142,7 +142,7 @@ const Footer = ({ setValue, setSelectedIndex }) => {
                 to="/web-sites"
                 onClick={() => {
                   setValue(1);
-                  setSelectedIndex(3);
+                  setSelectedIndex(2);
                 }}
               >
                 Website Development
