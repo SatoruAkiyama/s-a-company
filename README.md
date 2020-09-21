@@ -12,4 +12,4 @@ Live site(https://s-a-company.netlify.app/)
 
 # Author
 
-Satoru Akiyama
+Satoru Akiyama(https://satoruakiyama.com)
